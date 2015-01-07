@@ -5,6 +5,8 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "WXApi.h"
+#import "WeixinActivity.h"
 
 @implementation SocialSharing {
   UIPopoverController *_popover;
@@ -15,6 +17,9 @@
   if ([self isEmailAvailable]) {
     [self cycleTheGlobalMailComposer];
   }
+
+  NSString* appId = [[self.commandDelegate settings] objectForKey:@"wechatappid"];
+  [WXApi registerApp: appId];
 }
 
 - (void)available:(CDVInvokedUrlCommand*)command {
@@ -80,7 +85,7 @@
     }
     
     UIActivity *activity = [[UIActivity alloc] init];
-    NSArray *applicationActivities = [[NSArray alloc] initWithObjects:activity, nil];
+    NSArray *applicationActivities = @[ [[[WeixinSessionActivity alloc] init] setSubject:subject], [[[WeixinTimelineActivity alloc] init] setSubject:subject] ];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
     if (subject != (id)[NSNull null]) {
       [activityVC setValue:subject forKey:@"subject"];
