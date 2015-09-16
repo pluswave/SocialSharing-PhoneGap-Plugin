@@ -39,6 +39,12 @@
     return NO;
 }
 
+- (NSObject*)setSubject:(NSString*)targetSubject
+{
+    subject = targetSubject;
+    return self;
+}
+
 - (void)prepareWithActivityItems:(NSArray *)activityItems
 {
     for (id activityItem in activityItems) {
@@ -113,8 +119,14 @@
     if (scene == WXSceneSession) {
         //req.message.title = [NSString stringWithFormat:NSLocalizedString(@"%@ Share",nil), NSLocalizedStringFromTable(@"CFBundleDisplayName", @"InfoPlist", nil)];
         req.message.description = title;
+        req.message.title = subject;
     } else {
-        req.message.title = title;
+        if (subject != (id)[NSNull null]) {
+          req.message.title = subject;
+        }
+        else{
+          req.message.title = title;
+        }
     }
     [self setThumbImage:req];
     if (url) {

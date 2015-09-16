@@ -11,6 +11,7 @@
 
 @interface WeixinActivityBase : UIActivity {
     NSString *title;
+    NSString *subject;
     UIImage *image;
     NSURL *url;
     enum WXScene scene;
@@ -19,5 +20,6 @@
 @property (nonatomic, copy) NSURL * photoPath;
 
 - (void)setThumbImage:(SendMessageToWXReq *)req;
+- (NSObject*)setSubject:(NSString*)targetSubject;                            
 
 @end
