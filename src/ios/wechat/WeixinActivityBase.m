@@ -119,12 +119,14 @@
     if (scene == WXSceneSession) {
         //req.message.title = [NSString stringWithFormat:NSLocalizedString(@"%@ Share",nil), NSLocalizedStringFromTable(@"CFBundleDisplayName", @"InfoPlist", nil)];
         req.message.description = title;
-        req.message.title = subject;
+        if (subject != (id)[NSNull null]) {
+          req.message.title = subject;
+        }
     } else {
         if (subject != (id)[NSNull null]) {
           req.message.title = subject;
         }
-        else{
+        else if( title != (id)[NSNull null]){
           req.message.title = title;
         }
     }
