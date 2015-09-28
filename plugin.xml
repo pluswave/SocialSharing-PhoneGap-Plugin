@@ -56,6 +56,19 @@
       </array>
     </config-file>
 
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>weixin</string>
+      </array>     
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+      <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+      </dict>
+    </config-file>
+
     <header-file src="src/ios/SocialSharing.h"/>
     <source-file src="src/ios/SocialSharing.m"/>
 
@@ -78,9 +91,10 @@
     <resource-file src="src/ios/wechat/resource/icon_timeline-8@2x.png" />
     <source-file src="src/ios/wechat/resource/libWeChatSDK.a" framework="true" />
 
-      <framework src="Social.framework" weak="true" />
+    <framework src="Social.framework" weak="true" />
     <framework src="MessageUI.framework" weak="true" />
-
+    <framework src="CoreTelephony.framework" weak="true" />
+    
       <!-- Other required frameworks -->
       <framework src="libz.dylib" />
       <framework src="libsqlite3.0.dylib" />
